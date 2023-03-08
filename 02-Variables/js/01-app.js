@@ -26,4 +26,6 @@ var _usuario;
 var __usuario;
 
 var nombreProducto; // camelCase
-var nombre_producto // 
+var nombre_producto; // snake o serpiente o under score
+var Producto; // pascal case - similar a la sintaxis utilizada en clases
+var nombre producto; // erro al declarar variables.
