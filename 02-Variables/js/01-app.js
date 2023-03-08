@@ -17,10 +17,10 @@ var categoria = "Computadoras",
     calificacion = 5;
 
 //Los nombres de las variables no pueden iniciarlizar con numeros
-var 99dias;
+//var 99dias;
 var dias99;
 
-var 01_;
+//var 01_;
 var _01;
 var _usuario;
 var __usuario;
@@ -28,4 +28,4 @@ var __usuario;
 var nombreProducto; // camelCase
 var nombre_producto; // snake o serpiente o under score
 var Producto; // pascal case - similar a la sintaxis utilizada en clases
-var nombre producto; // erro al declarar variables.
+//var nombre producto; // erro al declarar variables.
