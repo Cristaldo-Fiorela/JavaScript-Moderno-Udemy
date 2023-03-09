@@ -8,7 +8,7 @@ console.log(producto.concat(" en descuento")); // indicando un valor
 
 //Formas de combinar ambas
 console.log( producto + " con un precio de: " + precio);
-console.log( "El producto " + producto + " tiene un precio de " + precio);
+console.log( "El producto " , producto , " tiene un precio de " , precio);
 
 // Con template strings
 console.log(`El producto ${producto} tiene un precio de $ ${precio}`);
