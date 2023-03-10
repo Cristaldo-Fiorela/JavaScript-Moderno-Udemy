@@ -15,9 +15,7 @@ if(puntaje > 400) {
     console.log('Buen puntaje... felicidades');
 }
 
-// utilizacion de funcioens y return
-
-
+// utilizacion de funciones y return
 function revisarPuntaje() {
     if(puntaje > 400) {
         console.log('Excelente!!');
