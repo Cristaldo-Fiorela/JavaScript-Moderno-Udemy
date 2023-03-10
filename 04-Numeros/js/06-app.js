@@ -16,8 +16,8 @@ console.log(Number.parseInt(numero3));
 
 // Revisar si un numero es entero o no 
 
-console.log(Number.isInteger(numero4));
-console.log(Number.isInteger(numero3));
+console.log(Number.isInteger(numero4)); // false
+console.log(Number.isInteger(numero3)); // false
 
 
 
