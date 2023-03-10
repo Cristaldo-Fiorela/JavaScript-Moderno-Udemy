@@ -1,10 +1,22 @@
-const numero1 = 60;
-const numero2 = 40;
+const numero1 = 30;
+const numero2 = 20;
 
-let total;
-let total2;
+let resultado;
 
-total = numero1 / numero2;
-total2 = numero1 % numero2;
-console.log(total);
-console.log(total2);
+
+// Suma
+resultado = numero1 + numero2;
+
+// Resta
+resultado = numero1 - numero2;
+
+// Multiplicacion
+resultado = numero1 * numero2;
+
+// Division 
+resultado = numero1 / numero2;
+
+//Modulo
+resultado = numero1 % numero2;
+
+console.log(resultado);
