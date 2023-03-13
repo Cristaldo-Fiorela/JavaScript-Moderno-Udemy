@@ -7,7 +7,7 @@ const carrito = [
     { nombre: 'Audifonos', precio: 300 },
     { nombre: 'Teclado', precio: 400 },
     { nombre: 'Celular', precio: 700 },
-]
+];
 
 meses.forEach( (mes, i) => {
     // console.log(i);
