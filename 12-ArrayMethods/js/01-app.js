@@ -1,3 +1,6 @@
+// SOME
+// .some soporta arreglo y arreglo de objetos
+
 const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'];
 
 const carrito = [
@@ -33,4 +36,3 @@ const existe2 = meses.some (mes => mes === 'Febrero');
 console.log(existe2)
 
 
-// .some soporta arreglo y arreglo de objetos
