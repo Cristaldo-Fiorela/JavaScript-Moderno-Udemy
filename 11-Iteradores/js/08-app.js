@@ -11,7 +11,6 @@ for(let propiedad in automovil){
     console.log(`${automovil[propiedad]}`)
 }
 
-
 // Tambien desde ecmascript 6 se puede usar for of para recorrer objetos. 
                                         // (objeto por el que quiero iterar)
 for(let [llaves, valor] of Object.entries(automovil)) {
