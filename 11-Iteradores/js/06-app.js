@@ -1,4 +1,4 @@
-// .forEach
+// forEach
 
 const pendientes = ['tarea', 'comer', 'proyecto', 'estudiar js'];
 
@@ -18,8 +18,8 @@ const carrito = [
     { nombre: 'Celular', precio : 700 },
 ]
 
-carrito.forEach( producto => console.log(producto.precio));
 // No crea un arreglo nuevo
+carrito.forEach( producto => console.log(producto.precio));
 
 // MAP
 // crea un arreglo nuevo
@@ -28,5 +28,3 @@ const nuevoArreglo2 = carrito.map( producto => console.log(producto.precio));
 
 console.log(nuevoArreglo); // crea el arreglo nuevo
 console.log(nuevoArreglo2); // no crea arreglo
-
-
