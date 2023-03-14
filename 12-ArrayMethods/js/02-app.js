@@ -1,3 +1,4 @@
+// FIND INDEX
 const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'];
 
 const carrito = [
