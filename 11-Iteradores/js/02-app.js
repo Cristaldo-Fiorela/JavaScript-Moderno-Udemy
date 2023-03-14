@@ -1,7 +1,8 @@
-// break y continuo
-
-// break detiene nuestro loop completamente, sin importar si se cumple una condicion o no.
-// continue <- no detiene la ejecucion del codigo pero si de la siguiente linea a este y vuelve a ejecutar el codigo desde el comienzo
+/*
+==== BREAK Y CONTINUE
+break detiene nuestro loop completamente, sin importar si se cumple una condicion o no.
+continue <- no detiene la ejecucion del codigo pero si de la siguiente linea a este y vuelve a ejecutar el codigo desde el comienzo
+*/
 
 for(let i = 0; i <= 10; i++) {
     if (i === 5) {
