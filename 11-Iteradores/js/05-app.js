@@ -1,6 +1,7 @@
-let i = 0;
+// DO WHILE
+// se ejecuta al menos una vez, independientemente de la ejecucion
 
-// do while se ejecuta al menos una vez, independientemente de la ejecucion
+let i = 0;
 
 do {
     console.log(`Numero ${i}`)
