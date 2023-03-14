@@ -1,7 +1,8 @@
 // WHILE
 // se ejecuta mientras una condicion sea verdadera
 
-let i = 0; // Inicializando el  While
+// Inicializando el  While
+let i = 0; 
 
 while(i < 10) {
     console.log(`Numero ${i}`)
