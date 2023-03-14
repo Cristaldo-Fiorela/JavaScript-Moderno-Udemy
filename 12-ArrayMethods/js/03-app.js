@@ -1,3 +1,4 @@
+// REDUCE
 const carrito = [
     { nombre: 'Monitor 27 Pulgadas', precio: 500 },
     { nombre: 'Televisión', precio: 100 },
@@ -12,8 +13,11 @@ let total = 0;
 carrito.forEach(producto => total += producto.precio);
 console.log(total);
 
-// Con un reduce
-// los parametros que le pasa son (VALOR PREVIO, VALOR ACTUAL)
-//total + producto.precio, 0 <==== el 0 es el valor incial que le asignamos
+/*
+Con un reduce
+los parametros que le pasa son (VALOR PREVIO, VALOR ACTUAL)
+total + producto.precio, 0 <==== el 0 es el valor incial que le asignamos
+*/
+
 let resultado = carrito.reduce ((total, producto) => total + producto.precio, 0);
 console.log(resultado);
