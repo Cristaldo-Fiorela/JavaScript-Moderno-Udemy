@@ -1,16 +1,21 @@
-// For Loop
-// El codigo se ejecuta hasta que el codigo deje de cumplir una condicion
+/*
+For Loop
+El codigo se ejecuta hasta que el codigo deje de cumplir una condicion
 
-// 1. inicializador
-// 2. condicion a revisar
-// 3. incremento
+1. inicializador
+2. condicion a revisar
+3. incremento
+*/
+
 for(let i = 0; i <= 10; i++) {
     console.log(`Numero: ${i}`);
 }
 
-// En un for loop como indentificar los numeros pares de los impares
-// no hay condicion para los impares asi que lo dejamos en el else
-// realizamos con modulo la condicion de los pares.
+/*
+En un for loop como indentificar los numeros pares de los impares
+no hay condicion para los impares asi que lo dejamos en el else
+realizamos con modulo la condicion de los pares.
+*/
 
 for(let i =0; i <= 20; i++) {
     if( i % 2 === 0) {
