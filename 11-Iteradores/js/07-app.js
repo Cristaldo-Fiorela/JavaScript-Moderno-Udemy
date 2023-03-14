@@ -12,7 +12,6 @@ const carrito = [
     { nombre: 'Celular', precio : 700 },
 ]
 
-
 //Recorre el arreglo mientras existan elementos. Luego de esto se detiene.
 for (let pendiente of pendientes) {
     console.log(pendiente)
