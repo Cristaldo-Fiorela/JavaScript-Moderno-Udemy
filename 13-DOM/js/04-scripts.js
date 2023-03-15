@@ -1,9 +1,9 @@
 /*
-QUERYSELECTOR
-sintaxis similar a selector de css
-retorna solamente al primero que encuentre, es decir retorna como max 1 elemento. 
+======= QUERYSELECTOR =======
+-Sintaxis similar a selector de css
+-Retorna solamente al primero que encuentre, es decir retorna como max 1 elemento. 
 -Si no existe no retorna nada
-Los selectores pueden ser tan especificos como lo requiramos
+-Los selectores pueden ser tan especificos como lo requiramos
 */
 
 const card = document.querySelector('.card');
