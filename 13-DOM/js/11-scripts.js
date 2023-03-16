@@ -13,15 +13,31 @@ btnFlotante.addEventListener('click', () => {
 function mostrarOcultarFooter(){
     if (footer.classList.contains('activo')) {
         footer.classList.remove('activo')
-        this.classList.remove('activo');
-        this.textContent = ('Idioma y Monera')
+        btnFlotante.classList.remove('activo');
+        btnFlotante.textContent = 'Idioma y Moneda';
     } else {
         footer.classList.add('activo');
-        this.classList.add('activo');
-        this.textContent.add('X Cerrar')
+        btnFlotante.classList.add('activo');
+        btnFlotante.textContent = 'X Cerrar';
     }
 
     console.log(footer.classList);
 }
 
-// This hace referencia a lo que llamo a ejecutar nuestra funcion de ocultar footer
+// function mostrarOcultarFooter {
+//     constructor() {
+//         if (footer.classList.contains('activo')) {
+//             footer.classList.remove('activo');
+//             this.classList.remove('activo');
+//             this.textContent = 'Idioma y Moneda';
+//         } else {
+//             footer.classList.add('activo');
+//             this.classList.add('activo');
+//             this.textContent = 'X Cerrar';
+//         }
+
+//         console.log(footer.classList);
+//     }
+// }
+
+// This hace referencia a lo que llamo a ejecutar nuestra funcion de ocultar footer (no me anda 😢)
