@@ -1,7 +1,15 @@
+/*
+    Añade un campo extra llamado CC, para añadir un destinatario extra.
+    este campo no es obligatorio pero en caso de tener informacion debes validar que sea un email valido
+
+    este reto te debe tomar 20min
+*/
+
 document.addEventListener('DOMContentLoaded', function () {
 
     const email = {
         email: '',
+        cc: '',
         asunto: '',
         mensaje: '',
     }
@@ -9,20 +17,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Seleccionar los elementos de la interfaz
     const inputEmail = document.querySelector('#email');
+    const inputCc = document.querySelector('#cc');
     const inputAsunto = document.querySelector('#asunto');
     const inputMensaje = document.querySelector('#mensaje');
     const formulario = document.querySelector('#formulario');
     const btnSubmit = document.querySelector('#formulario button[type="submit"]')
     const btnReset = document.querySelector('#formulario button[type="reset"]')
     const spinner = document.querySelector('#spinner');
-    const btnAddEmail = document.querySelector('#agregarEmail');
-    console.log(btnAddEmail)
 
     // Asignar eventos
     inputEmail.addEventListener('blur', validar);
     inputAsunto.addEventListener('blur', validar);
     inputMensaje.addEventListener('blur', validar);
-    btnAddEmail.addEventListener('click', agregarInput);
+    inputCc.addEventListener('blur', validar);
     formulario.addEventListener('submit', enviarEmail);
 
     btnReset.addEventListener('click', function (e) {
@@ -47,8 +54,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function validar(e) {
+        //console.log(e.target.value)
         //console.log(e.target.parentElement.nextElementSibling);
-        if (e.target.value.trim() == '') {
+
+        // Si el input esta vacio...
+        if (e.target.value.trim() == '' &&  e.target.id != 'cc') {
             mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);
             email[e.target.name] = ''; // reiniciamos el valor de nuestro objeto de email cada vez que este cambie.
             comprobarEmail();
@@ -56,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Preguntamos si no es un email valido y por id que se ejecute solo en el input email.
-        if (!validarEmail(e.target.value) && e.target.id === 'email') {
+        if (!validarEmail(e.target.value) && e.target.id === 'email' || !validarEmail(e.target.value) && e.target.id === 'cc') {
             mostrarAlerta('El email no es valido', e.target.parentElement);
             email[e.target.name] = '';
             comprobarEmail();
@@ -111,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function resetearFormulario() {
         // reiniciar el objeto
         email.email = '';
+        email.cc = '';
         email.asunto = '';
         email.mensaje = '';
         formulario.reset();
@@ -128,11 +139,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 3000);
     }
 
-    // function agregarInput() {
-    //     console.log('agregando input....');
-    //     const nuevoLabel = document.createElement('LABEL');
-    //     nuevoLabel.textContent = 'CC:'
-
-    //     formulario.appendChild(nuevoLabel);
-    // }
 })
