@@ -95,12 +95,27 @@ function llenarSelect() {
     }
 }
 
-// Filtros de select
+// FUNCION DE ALTO NIVEL:
+// toman otras funciones como parametro
 function filtrarAuto() {
     const resultado = autos.filter( filtrarMarca ).filter( filtrarYear ).filter( filtrarMinimo).filter( filtrarMaximo).filter( filtrarPuertas).filter( filtrarTransmision ).filter( filtrarColor );
 
-    mostrarAutos(resultado);
+    if(resultado.length) {
+        mostrarAutos(resultado);
+    } else {
+        noResultado();
+    }
 }
+
+function noResultado() {
+    limpiarHTML();
+    const noResultado = document.createElement('DIV');
+    noResultado.classList.add('alerta', 'error');
+    noResultado.textContent = 'No hay resultados, intenta con otros terminos de busqueda.';
+    resultado.appendChild(noResultado);
+}
+
+// Filtros de select
 
 function filtrarMarca(auto) {
     const { marca } = datosBusqueda;
@@ -163,6 +178,3 @@ function filtrarColor(auto) {
     }
     return auto;
 }
-/* 
-Ver desde 17 a 21
-*/
