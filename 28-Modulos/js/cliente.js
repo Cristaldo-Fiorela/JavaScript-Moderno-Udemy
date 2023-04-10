@@ -34,3 +34,8 @@ export class Cliente {
         return `Cliente ${this.nombre} - Ahorro: ${this.ahorro}`
     }
 }
+
+// Se puede poner sin nombre ya que al importar el asignamos un alias
+export default function nuevaFuncion() {
+    console.log('Este es el export default');
+}

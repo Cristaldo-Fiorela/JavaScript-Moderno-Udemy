@@ -1,13 +1,15 @@
-import { nombreCliente, ahorro, mostrarInformacion, tieneSaldo, Cliente } from './cliente.js';
+import nuevaFuncion, { nombreCliente as clienteNombre, ahorro, mostrarInformacion, tieneSaldo, Cliente } from './cliente.js';
 import { Empresa } from './empresa.js'
 
+nuevaFuncion();
 
-console.log(nombreCliente, ahorro);
-console.log(mostrarInformacion(nombreCliente, ahorro));
+console.log(clienteNombre);
+console.log(ahorro);
+console.log(mostrarInformacion(clienteNombre, ahorro));
 
 tieneSaldo(ahorro)
 
-const cliente = new Cliente(nombreCliente, ahorro);
+const cliente = new Cliente(clienteNombre, ahorro);
 
 console.log(cliente.mostrarInformacion());
 
