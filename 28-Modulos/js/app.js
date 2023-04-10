@@ -13,4 +13,4 @@ console.log(cliente.mostrarInformacion());
 
 //Importar empresa 
 const empresa = new Empresa('Codigo con Juan', 100, 'Aprendizaje en linea');
-console.log(empresa);
+console.log(empresa.mostrarInformacion());
