@@ -1,3 +1,5 @@
+const carrito = ['Producto 1', 'Producto 2', 'Producto 3']
+
 function crearIterador() {
     let i = 0;
 
@@ -12,8 +14,6 @@ function crearIterador() {
         }
     }
 }
-
-const carrito = ['Producto 1', 'Producto 2', 'Producto 3']
 
 // Utilizar le iterador
 const recorrerCarrito = crearIterador(carrito);
