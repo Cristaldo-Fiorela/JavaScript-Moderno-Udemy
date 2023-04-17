@@ -12,12 +12,12 @@ notificarBtn.addEventListener('click', () => {
 
 verNotificacion.addEventListener('click', () => {
     if( Notification.permission === 'granted') {
-        new Notification('Esta es la notificacion', {
+        const notificacion = new Notification('Esta es la notificacion', {
             icon: '../img/ccj.png',
             body: 'Codigo con Juan, aprende con proyectos reales'
         })
 
-        verNotificacion.onclick =  function() {
+        notificacion.onclick =  function() {
             window.open('https://www.codigoconjuan.com')
         }
     }
