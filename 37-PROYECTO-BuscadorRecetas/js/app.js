@@ -4,17 +4,26 @@ const resultado =  document.querySelector('#resultado');
 const modalFooter = document.querySelector('.modal-footer');
 const toastDiv = document.querySelector('#toast');
 const toastBody = document.querySelector('.toast-body');
+const favoritosDiv= document.querySelector('.favoritos')
 
 const modal = new bootstrap.Modal('#modal', {});
 
 // Event Listener
 document.addEventListener('DOMContentLoaded', iniciarApp);
-selectCategories.addEventListener('change', seleccionarCategoria);
+
+//selectCategories.addEventListener('change', seleccionarCategoria);
 
 
 // Function
 function iniciarApp() {
-    obtenerCategorias()
+    if(selectCategories) {
+        selectCategories.addEventListener('change', seleccionarCategoria);
+
+        obtenerCategorias();
+    }
+    if(favoritosDiv) {
+        obtenerFavoritos();
+    }
 }
 
 function obtenerCategorias(){
@@ -66,15 +75,15 @@ function mostrarRecetas(recetas = []) {
 
         const recetaImagen = document.createElement('IMG');
         recetaImagen.classList.add('card-img-top');
-        recetaImagen.alt = `Imagen de la receta ${strMeal}`;
-        recetaImagen.src = strMealThumb;
+        recetaImagen.alt = `Imagen de la receta ${strMeal ??  receta.title}`;
+        recetaImagen.src = strMealThumb ?? receta.img;
 
         const recetaCardBody = document.createElement('DIV');
         recetaCardBody.classList.add('card-body');
 
         const recetaHeading = document.createElement('H3');
         recetaHeading.classList.add('card-title', 'mb-3');
-        recetaHeading.textContent = strMeal;
+        recetaHeading.textContent = strMeal ?? receta.title;
 
         const recetaBtn = document.createElement('BUTTON');
         recetaBtn.classList.add('btn', 'btn-danger', 'w-100');
@@ -82,7 +91,7 @@ function mostrarRecetas(recetas = []) {
         // recetaBtn.dataset.bsTarget = '#modal';
         // recetaBtn.dataset.bsToggle = 'modal';
         recetaBtn.onclick = function () {
-            seleccionarReceta(idMeal);
+            seleccionarReceta(idMeal ??  receta.id);
         }
 
         //Inyectar en el codigo HTML
@@ -110,7 +119,7 @@ function seleccionarReceta(id) {
 function mostrarRecetaModal(receta) {
     const {idMeal, strInstructions, strMeal, strMealThumb} = receta;
 
-    // Añador contenido al modal
+    // Añadir contenido al modal
     const modalTitle = document.querySelector('.modal .modal-title');
     const modalBody = document.querySelector('.modal .modal-body');
 
@@ -202,6 +211,20 @@ function mostrarToast(mensaje) {
     const toast = new bootstrap.Toast(toastDiv);
     toastBody.textContent = mensaje;
     toast.show();
+}
+
+function obtenerFavoritos() {
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
+
+    if(favoritos.length) {
+        mostrarRecetas(favoritos);
+        return
+    }
+
+    const noFavoritos = document.createElement('P');
+    noFavoritos.textContent = 'No hay favoritos aun';
+    noFavoritos.classList.add('fs-4', 'text-center', 'font-bold', 'mt-5');
+    resultado.appendChild(noFavoritos);
 }
 
 function limpiarHTML(selector) {
