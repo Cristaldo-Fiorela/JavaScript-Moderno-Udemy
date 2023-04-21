@@ -2,6 +2,8 @@
 const selectCategories = document.querySelector('#categorias');
 const resultado =  document.querySelector('#resultado');
 const modalFooter = document.querySelector('.modal-footer');
+const toastDiv = document.querySelector('#toast');
+const toastBody = document.querySelector('.toast-body');
 
 const modal = new bootstrap.Modal('#modal', {});
 
@@ -143,16 +145,17 @@ function mostrarRecetaModal(receta) {
     // Limpiando el footer del modal para evitar la multiplicacion de botones en este
     limpiarHTML(modalFooter);
 
-    // Botones de cerrar y favoritos
+    // * Botones de cerrar y favoritos
     const btnFavorito = document.createElement('BUTTON');
     btnFavorito.classList.add('btn', 'btn-danger', 'col');
     btnFavorito.textContent = existeStorage(idMeal) ? 'Eliminar Favorito' : 'Guardar Favorito';
 
-    // Local Storage
+    // * Local Storage
     btnFavorito.onclick = function() {
         if(existeStorage(idMeal)) {
             eliminarFavorito(idMeal);
             btnFavorito.textContent = 'Guardar Favorito'
+            mostrarToast('Eliminado correctamente');
             return
         }
 
@@ -161,7 +164,8 @@ function mostrarRecetaModal(receta) {
             title: strMeal,
             img: strMealThumb
         });
-        btnFavorito.textContent = 'Eliminar favorito'
+        btnFavorito.textContent = 'Eliminar favorito';
+        mostrarToast('Agregando correctamente');
     }
 
     const btnCerrarModal = document.createElement('BUTTON');
@@ -192,6 +196,12 @@ function eliminarFavorito(id) {
 function existeStorage(id) {
     const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
     return favoritos.some( favorito => favorito.id === id);
+}
+
+function mostrarToast(mensaje) {
+    const toast = new bootstrap.Toast(toastDiv);
+    toastBody.textContent = mensaje;
+    toast.show();
 }
 
 function limpiarHTML(selector) {
