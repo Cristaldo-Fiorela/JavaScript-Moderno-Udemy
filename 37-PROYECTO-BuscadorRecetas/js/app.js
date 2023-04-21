@@ -1,5 +1,6 @@
 // DOM Selectors
 const selectCategories = document.querySelector('#categorias');
+const resultado =  document.querySelector('#resultado');
 
 // Event Listener
 document.addEventListener('DOMContentLoaded', iniciarApp);
@@ -57,6 +58,25 @@ function mostrarRecetas(recetas = []) {
 
         const recetaCardBody = document.createElement('DIV');
         recetaCardBody.classList.add('card-body');
+
+        const recetaHeading = document.createElement('H3');
+        recetaHeading.classList.add('card-title', 'mb-3');
+        recetaHeading.textContent = strMeal;
+
+        const recetaBtn = document.createElement('BUTTON');
+        recetaBtn.classList.add('btn', 'btn-danger', 'w-100');
+        recetaBtn.textContent = 'Ver Receta';
+
+        //Inyectar en el codigo HTML
+        recetaCardBody.appendChild(recetaHeading);
+        recetaCardBody.appendChild(recetaBtn);
+
+        recetaCard.appendChild(recetaImagen);
+        recetaCard.appendChild(recetaCardBody);
+
+        recetaContenedor.appendChild(recetaCard);
+
+        resultado.appendChild(recetaContenedor);
 
     })
 }
