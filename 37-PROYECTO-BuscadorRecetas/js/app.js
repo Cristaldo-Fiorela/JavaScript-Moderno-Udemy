@@ -1,6 +1,7 @@
 // DOM Selectors
 const selectCategories = document.querySelector('#categorias');
 const resultado =  document.querySelector('#resultado');
+const modalFooter = document.querySelector('.modal-footer');
 
 const modal = new bootstrap.Modal('#modal', {});
 
@@ -116,11 +117,51 @@ function mostrarRecetaModal(receta) {
         <img class="img-fluid" src=${strMealThumb} alt="receta ${strMeal}" />
         <h3>Instrucciones</h3>
         <p>${strInstructions}</p>
+        <h3 class="my-3">Ingredientes y cantidades</h3>
     `;
+
+    const listGroup = document.createElement('UL');
+    listGroup.classList.add('list-group');
+
+    //Mostrar cantidades e ingredientes
+    for(let i = 1; i <= 20; i++) {
+        if(receta[`strIngredient${i}`]) {
+
+            const ingrediente = receta[`strIngredient${i}`];
+            const cantidad = receta[`strMeasure${i}`];
+
+            const ingredienteLi = document.createElement('LI');
+            ingredienteLi.classList.add('list-group-item');
+            ingredienteLi.textContent = `${ingrediente} - ${cantidad}`;
+
+            listGroup.appendChild(ingredienteLi)
+        }
+    }
+
+    modalBody.appendChild(listGroup);
+
+    // Limpiando el footer del modal para evitar la multiplicacion de botones en este
+    limpiarHTML(modalFooter);
+
+    // Botones de cerrar y favoritos
+    const btnFavorito = document.createElement('BUTTON');
+    btnFavorito.classList.add('btn', 'btn-danger', 'col');
+    btnFavorito.textContent = 'Guardar Favorito';
+
+    const btnCerrarModal = document.createElement('BUTTON');
+    btnCerrarModal.classList.add('btn', 'btn-secondary', 'col');
+    btnCerrarModal.textContent = 'Cerrar';
+    btnCerrarModal.onclick = function() {
+        modal.hide();
+    }
+
+    modalFooter.appendChild(btnFavorito);
+    modalFooter.appendChild(btnCerrarModal);
 
     //Muestra el modal
     modal.show();
 }
+
 function limpiarHTML(selector) {
     while(selector.firstChild) {
         selector.removeChild(selector.firstChild);
