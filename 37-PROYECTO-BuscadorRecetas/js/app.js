@@ -146,11 +146,13 @@ function mostrarRecetaModal(receta) {
     // Botones de cerrar y favoritos
     const btnFavorito = document.createElement('BUTTON');
     btnFavorito.classList.add('btn', 'btn-danger', 'col');
-    btnFavorito.textContent = 'Guardar Favorito';
+    btnFavorito.textContent = existeStorage(idMeal) ? 'Eliminar Favorito' : 'Guardar Favorito';
 
     // Local Storage
     btnFavorito.onclick = function() {
         if(existeStorage(idMeal)) {
+            eliminarFavorito(idMeal);
+            btnFavorito.textContent = 'Guardar Favorito'
             return
         }
 
@@ -159,6 +161,7 @@ function mostrarRecetaModal(receta) {
             title: strMeal,
             img: strMealThumb
         });
+        btnFavorito.textContent = 'Eliminar favorito'
     }
 
     const btnCerrarModal = document.createElement('BUTTON');
@@ -178,6 +181,12 @@ function mostrarRecetaModal(receta) {
 function agregarFavorito(receta) {
     const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
     localStorage.setItem('favoritos', JSON.stringify([...favoritos, receta]))
+}
+
+function eliminarFavorito(id) {
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
+    const nuevosFavoritos = favoritos.filter( favorito => favorito.id  !== id);
+    localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos));
 }
 
 function existeStorage(id) {
