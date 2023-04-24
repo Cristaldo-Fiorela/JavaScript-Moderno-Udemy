@@ -1,6 +1,13 @@
 // DOM Selectors
 const resultado = document.querySelector('#resultado');
 const formulario = document.querySelector('#formulario');
+const paginacionDiv = document.querySelector('#paginacion');
+
+// Variables
+const registrosPorPaginas = 40;
+let totalPaginas;
+let iterador;
+let paginaActual = 1;
 
 window.onload = () => {
     formulario.addEventListener('submit', validarFormulario);
@@ -16,7 +23,7 @@ function validarFormulario(e) {
         return;
     }
 
-    buscarImagenes(terminoBusqueda);
+    buscarImagenes();
 }
 
 function mostrarAlerta(mensaje) {
@@ -40,17 +47,33 @@ function mostrarAlerta(mensaje) {
 
 }
 
-function buscarImagenes(termino) {
+function buscarImagenes() {
+
+    const termino = document.querySelector('#termino').value;
+
     const key = '35736069-6ee8dfb84528c64aa6d670fae';
-    const url = `https://pixabay.com/api/?key=${key}&q=${termino}&per_page=100`;
+    const url = `https://pixabay.com/api/?key=${key}&q=${termino}&per_page=${registrosPorPaginas}&page=${paginaActual}`;
 
     fetch(url)
         .then( respuesta => respuesta.json())
-        .then( resultado => mostrarImagenes(resultado.hits))
+        .then( resultado => {
+            totalPaginas = calcularPaginas(resultado.totalHits);
+            mostrarImagenes(resultado.hits);
+        })
+}
+
+// Generador que va a registrar la cantidad de elementos de acuerdo a las paginas
+function *crearPaginador(total) {
+    for (let i = 1; i <= total; i++) {
+        yield i;
+    }
+}
+
+function calcularPaginas(total) {
+    return parseInt( Math.ceil( total / registrosPorPaginas))
 }
 
 function mostrarImagenes(imagenes) {
-    console.log(imagenes);
 
     // Limpia el HTML
     while(resultado.firstChild) {
@@ -69,10 +92,41 @@ function mostrarImagenes(imagenes) {
                         <p class="font-bold"> ${likes} <span class="font-light"> Me Gusta</span></p>
                         <p class="font-bold"> ${views} <span class="font-light"> Veces vista</span></p>
 
-                        <a class="block w-full bd-blue-800 hover:bg-blue-500 text-white uppercase font-bold text-center rounded mt-5 p-1" href="${largeImageURL}" target="_blank" rel="noopener noreferrer">Ver imagen</a>
+                        <a 
+                            class="block w-full bg-blue-800 hover:bg-blue-500 text-white uppercase font-bold text-center rounded mt-5 p-1" href="${largeImageURL}" target="_blank" rel="noopener noreferrer">Ver imagen</a>
                     </div>
                 </div>
             </div>
         `
     });
+
+    //Limpiar el paginador previo
+    while(paginacionDiv.firstChild) {
+        paginacionDiv.removeChild(paginacionDiv.firstChild);
+    }
+
+    //Generar nuevo HTML
+    imprimirPaginador();
+}
+
+function imprimirPaginador() {
+    iterador = crearPaginador(totalPaginas);
+
+    while(true) {
+        const { value, done} = iterador.next();
+        if(done) return;
+
+        const boton = document.createElement('A');
+        boton.href = '#';
+        boton.dataset.pagina = value;
+        boton.textContent = value;
+        boton.classList.add('siguiente', 'bg-yellow-400','px-4', 'py-1', 'mr-2', 'font-bold', 'mb-4', 'rounded');
+
+        boton.onclick = () => {
+            paginaActual = value;
+            buscarImagenes();
+        }
+        paginacionDiv.appendChild(boton);
+    }
+    console.log(iterador.next().done)
 }
