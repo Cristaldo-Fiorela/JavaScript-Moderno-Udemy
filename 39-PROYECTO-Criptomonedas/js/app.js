@@ -8,7 +8,7 @@ const objBusqueda = {
 }
 
 // Crear un Promise
-const obtenerCriptomonedas = criptomonedas => new Promise( resolve => {
+const obtenerCriptomonedas = criptomonedas => new Promise(resolve => {
     resolve(criptomonedas);
 });
 
@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     formulario.addEventListener('submit', submitFormulario);
 
-    criptomonedasSelect.addEventListener( 'change', leerValor);
-    monedaSelect.addEventListener( 'change', leerValor);
+    criptomonedasSelect.addEventListener('change', leerValor);
+    monedaSelect.addEventListener('change', leerValor);
 })
 
 function consultarCriptomonedas() {
@@ -26,13 +26,12 @@ function consultarCriptomonedas() {
 
     fetch(url)
         .then(respuesta => respuesta.json())
-        .then( resultado => obtenerCriptomonedas(resultado.Data))
-        .then ( criptomonedas => selectCriptomonedas(criptomonedas))
+        .then(resultado => obtenerCriptomonedas(resultado.Data))
+        .then(criptomonedas => selectCriptomonedas(criptomonedas))
 }
 
-
 function selectCriptomonedas(criptomonedas) {
-    criptomonedas.forEach( cripto => {
+    criptomonedas.forEach(cripto => {
         const { FullName, Name } = cripto.CoinInfo;
 
         const option = document.createElement('OPTION');
@@ -45,20 +44,39 @@ function selectCriptomonedas(criptomonedas) {
 function submitFormulario(e) {
     e.preventDefault();
 
+    // validar
+    const { moneda, criptomoneda } = objBusqueda;
+
+    if (moneda === '' || criptomoneda === '') {
+        mostrarAlerta('Ambos campos son obligatorios')
+        return
+    }
+
+    // Consultar la API con los resultados
+
 }
 
 function leerValor(e) {
     objBusqueda[e.target.name] = e.target.value;
     console.log(objBusqueda);
-
-    // validad 
-    const { moneda, criptomoneda } = objBusqueda;
-
-    if(moneda === '' || criptomoneda === '') {
-        mostrarAlerta('Ambos campos son obligatorios')
-        return
-    }
 }
+
 function mostrarAlerta(mensaje) {
-    console.log(mensaje);
+
+    const existeError = document.querySelector('.error');
+
+    if (!existeError) {
+        const divMensaje = document.createElement('DIV');
+        divMensaje.classList.add('error');
+
+        // mensaje de error
+        divMensaje.textContent = mensaje;
+
+        formulario.appendChild(divMensaje);
+
+        setTimeout(() => {
+            divMensaje.remove();
+        }, 3000);
+    }
+
 }
