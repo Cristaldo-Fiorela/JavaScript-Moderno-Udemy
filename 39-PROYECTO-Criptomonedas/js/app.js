@@ -1,6 +1,7 @@
 const criptomonedasSelect = document.querySelector('#criptomonedas');
 const monedaSelect = document.querySelector('#moneda');
 const formulario = document.querySelector('#formulario');
+const resultado = document.querySelector('#resultado');
 
 const objBusqueda = {
     moneda: '',
@@ -53,7 +54,7 @@ function submitFormulario(e) {
     }
 
     // Consultar la API con los resultados
-
+    consultarApi();
 }
 
 function leerValor(e) {
@@ -79,4 +80,49 @@ function mostrarAlerta(mensaje) {
         }, 3000);
     }
 
+}
+
+function consultarApi() {
+    const { moneda, criptomoneda } = objBusqueda;
+
+    const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`;
+
+    fetch(url)
+        .then( respuesta => respuesta.json())
+        .then( cotizacion => mostrarCotizacionHTML(cotizacion.DISPLAY[criptomoneda][moneda]))
+}
+
+function mostrarCotizacionHTML(cotizacion) {
+
+    limpiarHTML();
+
+    const { PRICE, HIGHDAY, LOWDAY, CHANGEPCT24HOUR, LASTUPDATE } = cotizacion;
+
+    const precio = document.createElement('P');
+    precio.classList.add('precio');
+    precio.innerHTML = `El Precio es: <span>${PRICE}</span>`;
+
+    const precioAlto = document.createElement('P');
+    precioAlto.innerHTML = `Precio mas alto del dia: <span>${HIGHDAY}</span>`;
+
+    const precioBajo = document.createElement('P');
+    precioBajo.innerHTML = `Precio mas bajo del dia: <span>${LOWDAY}</span>`;
+
+    const ultimasHoras = document.createElement('P');
+    ultimasHoras.innerHTML = `Variacion ultimas 24 horas: <span>${CHANGEPCT24HOUR}%</span>`;
+
+    const ultimaActualizacion = document.createElement('P');
+    ultimaActualizacion.innerHTML = `Ultima actualizacion: <span>${LASTUPDATE}</span>`;
+
+    resultado.appendChild(precio);
+    resultado.appendChild(precioAlto);
+    resultado.appendChild(precioBajo);
+    resultado.appendChild(ultimasHoras);
+    resultado.appendChild(ultimaActualizacion);
+}
+
+function limpiarHTML() {
+    while(resultado.firstChild) {
+        resultado.removeChild(resultado.firstChild);
+    }
 }
