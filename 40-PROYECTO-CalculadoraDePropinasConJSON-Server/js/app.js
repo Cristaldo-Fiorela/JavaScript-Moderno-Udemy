@@ -57,7 +57,7 @@ function mostrarSecciones() {
 }
 
 function obtenerPlatillo() {
-    const url = 'http://localhost:4000/platillos'
+    const url = 'http://localhost:4000/platillos';
 
     fetch(url)
         .then( respuesta => respuesta.json())
@@ -93,6 +93,12 @@ function mostrarPlatillos(platillos) {
         inputCantidad.id = `producto-${id}`;
         inputCantidad.classList.add('form-control');
 
+        // Funcion que detecta la cantidad y el platillo que se esta agregando
+        inputCantidad.onchange = function() {
+            const cantidad = parseInt(inputCantidad.value);
+            agregarPlatillo({ ...platillo, cantidad });
+        }
+
         const agregar = document.createElement('DIV');
         agregar.classList.add('col-md-2');
         agregar.appendChild(inputCantidad);
@@ -105,4 +111,37 @@ function mostrarPlatillos(platillos) {
 
         contenido.appendChild(row);
     })
+}
+
+function agregarPlatillo(producto) {
+    // Extraer el pedido actual
+    let { pedido } = cliente;
+    //Revisar que la cantidad sea mayor a 0
+    if(producto.cantidad > 0) {
+
+        //Comprueba si el elemento ya existe en el array
+        if(pedido.some(articulo => articulo.id === producto.id)){
+
+            // El articulo existe, hay que actualizar la cantidad
+            const pedidoActualizado = pedido.map( articulo => {
+                if(articulo.id === producto.id) {
+                    articulo.cantidad = producto.cantidad;
+                }
+                return articulo; // retornamos el articulo para no perder los objetos independsientemente de que se cumpla la condicion o no
+            });
+
+            //Se asigna el nuexo array al cliente.pedido
+            cliente.pedido = [...pedidoActualizado];
+
+        } else {
+            // El articulo no existe, lo agregamos al array del pedido
+            cliente.pedido = [...pedido, producto];
+        };
+    } else {
+        //Eliminar elementos cuando la cantidad es 0
+        const resultado = pedido.filter( articulo => articulo.id !== producto.id);
+        cliente.pedido = [...resultado];
+    }
+
+    console.log(cliente.pedido)
 }
