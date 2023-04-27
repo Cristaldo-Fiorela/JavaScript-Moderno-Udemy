@@ -9,6 +9,7 @@ const categorias = {
     2: 'Bebida',
     3: 'Postres'
 }
+
 const btnGuardarCliente = document.querySelector('#guardar-cliente');
 btnGuardarCliente.addEventListener('click', guardarCliente);
 
@@ -143,5 +144,61 @@ function agregarPlatillo(producto) {
         cliente.pedido = [...resultado];
     }
 
-    console.log(cliente.pedido)
+    //Limpiar el HTML previo
+    limpiarHTML();
+
+    // Mostrar el Resumen
+    actualizarResumen();
+}
+
+function actualizarResumen() {
+    const contenido = document.querySelector('#resumen .contenido');
+
+    const resumen = document.createElement('DIV');
+
+    resumen.classList.add('col-md-6', 'card', 'py-5', 'px-3', 'shadow');
+
+    //Informacion de la mesa
+    const mesa = document.createElement('P');
+    mesa.textContent = 'Mesa: ';
+    mesa.classList.add('fw-bold');
+
+    const mesaSpan = document.createElement('SPAN');
+    mesaSpan.textContent = cliente.mesa;
+    mesaSpan.classList.add('fw-normal');
+    
+    //Informacion de la hora
+    const hora = document.createElement('P');
+    hora.textContent = 'Mesa: ';
+    hora.classList.add('fw-bold');
+
+    const horaSpan = document.createElement('SPAN');
+    horaSpan.textContent = cliente.hora;
+    horaSpan.classList.add('fw-normal');
+    
+    // Agregar a los elementos padre
+    mesa.appendChild(mesaSpan);
+    hora.appendChild(horaSpan);
+
+    // Titulo de la seccion
+    const heading = document.createElement('H3');
+    heading.textContent = 'Platillos Consumidos';
+    heading.classList.add('my-4', 'text-center');
+
+    // Iterar sobre el array de pedidos
+
+    // Agregar al contenido
+    resumen.appendChild(mesa);
+    resumen.appendChild(hora);
+    resumen.appendChild(heading);
+
+    contenido.appendChild(resumen);
+}
+
+function limpiarHTML() {
+    const contenido = document.querySelector('#resumen .contenido');
+
+    while( contenido.firstChild) {
+        contenido.removeChild(contenido.firstChild);
+    }
 }
