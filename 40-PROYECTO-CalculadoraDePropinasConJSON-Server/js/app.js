@@ -147,7 +147,7 @@ function agregarPlatillo(producto) {
     //Limpiar el HTML previo
     limpiarHTML();
 
-    if(cliente.pedido.length) {
+    if (cliente.pedido.length) {
         // Mostrar el Resumen
         actualizarResumen();
     } else {
@@ -237,7 +237,7 @@ function actualizarResumen() {
         btnEliminar.textContent = 'Eliminar del Pedido'
 
         // Funcion para eliminar del pedido
-        btnEliminar.onclick = function() {
+        btnEliminar.onclick = function () {
             eliminarProducto(id)
         }
 
@@ -279,7 +279,7 @@ function limpiarHTML() {
 }
 
 function calcularSubtotal(precio, cantidad) {
-    return `$ ${ precio * cantidad }`;
+    return `$ ${precio * cantidad}`;
 }
 
 function eliminarProducto(id) {
@@ -291,7 +291,7 @@ function eliminarProducto(id) {
     //Limpiar el HTML previo
     limpiarHTML();
 
-    if(cliente.pedido.length) {
+    if (cliente.pedido.length) {
         // Mostrar el Resumen
         actualizarResumen();
     } else {
@@ -399,7 +399,7 @@ function calcularPropina() {
     let subtotal = 0;
 
     // Calcula el subtotal a pagar
-    pedido.forEach( articulo => {
+    pedido.forEach(articulo => {
         subtotal += articulo.cantidad * articulo.precio;
     });
 
@@ -412,5 +412,58 @@ function calcularPropina() {
     // Calcular el total a pagar
     const total = subtotal + propina;
 
-    console.log(total)
+    mostrarTotalHTML(subtotal, total, propina);
+}
+
+function mostrarTotalHTML(subtotal, total, propina) {
+    const divTotales = document.createElement('DIV');
+    divTotales.classList.add('total-pagar', 'my-5');
+
+    // Subtotal
+    const subtotalParrafo = document.createElement('P');
+    subtotalParrafo.classList.add('fs-4', 'fw-bold', 'mt-2');
+    subtotalParrafo.textContent = 'Subtotal Consumo: ';
+
+    const subtotalSpan = document.createElement('SPAN');
+    subtotalSpan.classList.add('fw-normal');
+    subtotalSpan.textContent = `$${subtotal}`;
+
+    subtotalParrafo.appendChild(subtotalSpan);
+
+    // Propina
+    const propinaParrafo = document.createElement('P');
+    propinaParrafo.classList.add('fs-4', 'fw-bold', 'mt-2');
+    propinaParrafo.textContent = 'Propina: ';
+
+    const propinaSpan = document.createElement('SPAN');
+    propinaSpan.classList.add('fw-normal');
+    propinaSpan.textContent = `$${propina}`;
+
+    propinaParrafo.appendChild(propinaSpan);
+
+    // Total
+    const totalParrafo = document.createElement('P');
+    totalParrafo.classList.add('fs-4', 'fw-bold', 'mt-2');
+    totalParrafo.textContent = 'Total: ';
+
+    const totalSpan = document.createElement('SPAN');
+    totalSpan.classList.add('fw-normal');
+    totalSpan.textContent = `$${total}`;
+
+    totalParrafo.appendChild(totalSpan);
+
+    // Eliminar el ultimo resultado
+    const totalPagarDiv = document.querySelector('.total-pagar');
+
+    if(totalPagarDiv) {
+        totalPagarDiv.remove();
+    }
+
+    // Inyectando en el div padre
+    divTotales.appendChild(subtotalParrafo);
+    divTotales.appendChild(propinaParrafo);
+    divTotales.appendChild(totalParrafo);
+
+    const formulario = document.querySelector('.formulario > div');
+    formulario.appendChild(divTotales);
 }
