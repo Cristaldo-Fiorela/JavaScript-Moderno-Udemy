@@ -57,6 +57,11 @@ function mostrarSecciones() {
     seccionesOcultas.forEach(seccion => seccion.classList.remove('d-none'));
 }
 
+/*
+* Consulta la API/JSON para obtener los datos a utilizar
+? se debe levantar la base con el sgte comando:
+json-server --watch db.json --port 400
+*/
 function obtenerPlatillo() {
     const url = 'http://localhost:4000/platillos';
 
@@ -455,7 +460,7 @@ function mostrarTotalHTML(subtotal, total, propina) {
     // Eliminar el ultimo resultado
     const totalPagarDiv = document.querySelector('.total-pagar');
 
-    if(totalPagarDiv) {
+    if (totalPagarDiv) {
         totalPagarDiv.remove();
     }
 
