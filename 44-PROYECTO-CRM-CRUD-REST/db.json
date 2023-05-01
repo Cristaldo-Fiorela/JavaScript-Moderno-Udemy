@@ -6,6 +6,13 @@
       "telefono": "12",
       "empresa": "12212",
       "id": 26
+    },
+    {
+      "nombre": "fio",
+      "email": "cristaldofiorela@gmail.com",
+      "telefono": "03764711214",
+      "empresa": "Minecraft",
+      "id": 27
     }
   ]
 }
