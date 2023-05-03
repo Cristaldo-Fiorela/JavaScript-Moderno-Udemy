@@ -19,7 +19,6 @@ self.addEventListener('install', e => {
                 console.log('cacheando');
                 cache.addAll(archivos)
             })
-            .catch( error =>  console.log(error))
     )
 })
 
@@ -32,6 +31,12 @@ self.addEventListener('activate', e => {
 
 // Evento fetch para descargar archivos estaticos
 self.addEventListener('fetch', e => {
-    
     console.log('Fetch...', e);
+
+    e.respondWith(
+        caches.match(e.request) // identifica el tipo de request
+            .then( respuestaCache => {
+                return respuestaCache;
+            })
+    )
 })
