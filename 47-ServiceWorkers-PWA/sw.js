@@ -1,12 +1,11 @@
-const nombreCache = 'apv-v1'
-
+const nombreCache = 'apv-v1';
 const archivos = [
-    '/',
-    '/index.html',
-    '/css/bootstrap.css',
-    '/css/styles.css',
-    '/js/app.js',
-    '/js/apv.js'
+    './',
+    './index.html',
+    './css/bootstrap.css',
+    './css/styles.css',
+    './js/app.js',
+    './js/apv.js'
 ];
 
 // Cuando se instala el service worker se ejecuta solo 1 vez
@@ -18,8 +17,9 @@ self.addEventListener('install', e => {
         caches.open(nombreCache)
             .then( cache => {
                 console.log('cacheando');
-                cache.addAll(archivos);
+                cache.addAll(archivos)
             })
+            .catch( error =>  console.log(error))
     )
 })
 
