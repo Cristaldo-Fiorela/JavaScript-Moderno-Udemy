@@ -3,6 +3,7 @@
 -Son rapidas - en menos de 5seg cargan
 -Instalable - en telefono o computadora
 -Conexion offline 
+-Para que se pueda instalar debe tener un manifest valido, un dominio https o local host y registrado el event listener de fetch
 
 * Service Workes
 -Son script corriendo todo el tiempo detras de escena
