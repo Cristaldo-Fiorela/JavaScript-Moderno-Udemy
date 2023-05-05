@@ -9,6 +9,11 @@
   "author": "'Fiorela Cristaldo'",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^29.5.0"
+    "@babel/preset-env": "^7.21.5",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   }
 }
