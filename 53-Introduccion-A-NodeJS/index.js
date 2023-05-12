@@ -11,12 +11,18 @@ const port = process.env.PORT || 4000;
 // Habilitar PUG
 app.set('view engine', 'pug');
 
+// Obtener el año actual
+app.use((req, res, next) => {
+    const year = new Date();
+    res.locals.actualYear = year.getFullYear();
+    res.locals.nombreSitio = 'Agencia de Viajes';
+    next(); // va al sgte middelware, si no esta el next se cae la pagina. Se puede forzar que continue en return next();
+});
+
 // Definir la carpeta publica
 app.use(express.static('public'))
 
 // Agrega router
-// metodo de express
-//monta o coloca las funciones middleware especificadas en la ruta especificada
 app.use('/', router) // soporta GET, PUT, POST, DELETE, PATCH
 
 app.listen(port, () => {

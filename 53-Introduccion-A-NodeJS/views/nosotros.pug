@@ -1,5 +1,29 @@
 extends ./layout/index
 
 block contenido
-    p Nosotros 
-    img(src="img/cupon.jpg")
+    main.container.mt-5 
+        .row
+            .col-md-5 
+                img(src="img/nosotros.jpg", alt="torre eiffel", class="img-fluid")
+            .col-md-7
+                h1 #{pagina}
+                blockquote Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis commodo arcu eget nisi convallis, vitae bibendum nisl viverra. Sed sit amet vestibulum arcu. Morbi a tellus odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec fringilla neque lorem, nec convallis mauris aliquet eget. Pellentesque non ullamcorper enim. Nam consequat sollicitudin dui, et aliquam ex condimentum vitae.
+
+                p Fusce venenatis eros eget laoreet cursus. Quisque faucibus velit at luctus tristique. Curabitur congue gravida felis, non viverra lectus blandit sit amet. Donec convallis erat ante, a hendrerit sapien volutpat et. Proin vehicula eros felis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur eros dolor, porttitor eget felis quis, placerat molestie neque.
+
+                p Morbi vehicula erat quis sagittis volutpat. Vivamus fermentum orci eu velit elementum porttitor. Morbi vestibulum porta mi, eget interdum massa condimentum vel. Praesent tristique congue rutrum. Nullam faucibus, ligula eget porttitor euismod, lacus est auctor tellus, sed vulputate velit felis non lectus. Suspendisse potenti. Nunc a est tellus. Cras ac nisl pretium, vulputate tortor nec, pellentesque lorem. Sed turpis dui, sodales fermentum rhoncus at, commodo malesuada turpis. Nam ut ullamcorper turpis, feugiat interdum ex. Donec lobortis congue euismod.
+    .listado-iconos
+        .container.mt-5.py-5.text-center
+            .row
+                .col-md-4
+                    img(src="img/icono_seguridad.svg", alt="icono seguridad", class="img-fluid mb-4")
+                    h2.mb-4 Seguridad 
+                    p Cras ac nisl pretium, vulputate tortor nec, pellentesque lorem. Sed turpis dui, sodales fermentum rhoncus at, commodo malesuada turpis.
+                .col-md-4
+                    img(src="img/icono_destinos.svg", alt="icono destinos", class="img-fluid mb-4")
+                    h2.mb-4 Mejores destinos 
+                    p Cras ac nisl pretium, vulputate tortor nec, pellentesque lorem. Sed turpis dui, sodales fermentum rhoncus at, commodo malesuada turpis.
+                .col-md-4
+                    img(src="img/icono_precios.svg", alt="icono precios", class="img-fluid mb-4")
+                    h2.mb-4 Los Mejores precios 
+                    p Cras ac nisl pretium, vulputate tortor nec, pellentesque lorem. Sed turpis dui, sodales fermentum rhoncus at, commodo malesuada turpis.
