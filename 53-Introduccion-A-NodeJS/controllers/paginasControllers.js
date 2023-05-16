@@ -1,3 +1,6 @@
+import { Viaje } from '../models/Viaje.js';
+
+// req lo que node envia : res es lo que express envia
 const paginaInicio = (req, res) => {
     res.render('inicio', {
         pagina: 'Inicio'
@@ -10,9 +13,14 @@ const paginaNosotros = (req, res) => {
     }); // render imprime una vista
 }
 
-const paginaViajes = (req, res) => {
+const paginaViajes = async (req, res) => {
+    // Consulta base de datos
+    const viajes = await Viaje.findAll();
+    console.log(viajes);
+
     res.render('viajes', {
-        pagina: 'Viajes'
+        pagina: 'Proximos Viajes',
+        viajes, // object literal
     }); // render imprime una vista
 }
 
