@@ -11,6 +11,7 @@ db.authenticate() // retorna promise
     .catch( error => console.log(error) );
 
 // Definir puerto
+// http://localhost/phpmyadmin/
 const port = process.env.PORT || 4000;
 
 // Habilitar PUG
