@@ -6,6 +6,7 @@ class Cliente {
     //Permite acceder a este desde un metodo de clase pero no desde un objeto.
     #nombre
     //Accediendo el nombre desde metodo
+    // Metodos accesores
     setNombre(nombre) {
         this.#nombre = nombre;
     }
