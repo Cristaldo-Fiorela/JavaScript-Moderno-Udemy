@@ -2,7 +2,11 @@
 import { ref } from "vue";
 import Header from "./components/Header.vue";
 
-const cantidad = ref(50)
+const cantidad = ref(10000);
+const MIN = 0;
+const MAX = 20000;
+const STEP = 100;
+
 // const state = reactive({ // no toma valores primitivos
 //   cantidad: 0
 // })
@@ -22,6 +26,10 @@ console.log(cantidad.value);
                 type="range"
                 class="w-full bg-gray-200 accent-lime-500 hover:accent-lime-600"
                 @input="handleChange"
+                :min="MIN"
+                :max="MAX"
+                :step="STEP"
+                :value="cantidad"
             />
 
             <p>$ {{ cantidad }}</p>
