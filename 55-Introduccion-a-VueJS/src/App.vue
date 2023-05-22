@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import Header from "./components/Header.vue";
 
-const cantidad = ref(0)
+const cantidad = ref(50)
 // const state = reactive({ // no toma valores primitivos
 //   cantidad: 0
 // })
@@ -24,7 +24,7 @@ console.log(cantidad.value);
                 @input="handleChange"
             />
 
-            {{ cantidad }}
+            <p>$ {{ cantidad }}</p>
         </div>
     </div>
 </template>
