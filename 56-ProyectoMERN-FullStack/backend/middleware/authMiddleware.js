@@ -1,7 +1,17 @@
+import  jwt  from "jsonwebtoken";
 
 const checkAuth = ( req, res, next) => {
-    console.log('desde mi middleware');
 
+    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        try {
+            
+        } catch (error) {
+   
+        }
+    } 
+
+    const error = new Error('Token no Valido o Inexistente');
+    res.status(403).json({ msg: error.message });
     next();
 };
 
