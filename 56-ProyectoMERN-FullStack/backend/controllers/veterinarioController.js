@@ -59,7 +59,12 @@ const autenticar = async ( req, res ) => {
     }
 
     // Comprobar si el usuario esta confirmado o no
-    
+    if(!usuario.confirmado) {
+        const error = new Error('Tu Cuenta no ha sido confirmada');
+        return res.status(403).json({ msg: error.message});
+    }
+
+    //Autenticar al usuario
 }
 
 export {
