@@ -30,6 +30,8 @@ const ConfirmarCuenta = () => {
             setCargando(false);
         };
         confirmarCuenta();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
