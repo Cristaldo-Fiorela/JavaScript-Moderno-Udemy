@@ -5,7 +5,7 @@ import Registrar from "./pages/Registrar";
 import OlvidePassword from "./pages/OlvidePassword";
 import NuevoPassword from "./pages/NuevoPassword";
 import ConfirmarCuenta from "./pages/ConfirmarCuenta";
-import { AuthProvider } from "../context/AuthProvider";
+import { AuthProvider } from "./context/AuthProvider";
 
 function App() {
     return (
