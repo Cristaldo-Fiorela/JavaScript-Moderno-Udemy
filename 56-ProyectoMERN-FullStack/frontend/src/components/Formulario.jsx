@@ -1,7 +1,7 @@
 const Formulario = () => {
     return (
         <>
-            <p>
+            <p className="text-center">
                 Añade tus Pacientes y {""}
                 <span className="text-indigo-600 font-bold">Administalos</span>
             </p>
