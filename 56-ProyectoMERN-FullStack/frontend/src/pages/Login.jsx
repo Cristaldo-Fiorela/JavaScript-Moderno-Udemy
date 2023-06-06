@@ -23,7 +23,7 @@ const Login = () => {
 
         try {
             const { data } = await clienteAxios.post('/veterinarios/login', { email, password });
-
+            console.log(data);
             localStorage.setItem('token', data.token);
 
             navigate('/admin');
@@ -69,7 +69,7 @@ const Login = () => {
                         </label>
                         <input
                             type="password"
-                            placeholder="Email de Registro"
+                            placeholder="Contraseña"
                             className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
                             value={password}
                             onChange={e => setPassword(e.target.value)}
