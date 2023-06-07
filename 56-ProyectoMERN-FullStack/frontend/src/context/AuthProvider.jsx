@@ -1,31 +1,34 @@
-import { useState, useEffect, createContext } from  'react';
-import clienteAxios from '../config/axios';
+import { useState, useEffect, createContext } from "react";
+import clienteAxios from "../config/axios";
 
 const AuthContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
-    const [ auth, setAuth ] = useState({});
-    const [ cargando, setCargando ] = useState(true);
+    const [auth, setAuth] = useState({});
+    const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
         const autenticarUsuario = async () => {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem("token");
 
-            if(!token) {
-                setCargando(false)
-                return
+            if (!token) {
+                setCargando(false);
+                return;
             }
 
             const config = {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                }
-            }
+                    Authorization: `Bearer ${token}`,
+                },
+            };
 
             try {
-                const { data } = await clienteAxios('/veterinarios/perfil', config);
+                const { data } = await clienteAxios(
+                    "/veterinarios/perfil",
+                    config
+                );
 
                 setAuth(data);
             } catch (error) {
@@ -33,14 +36,14 @@ const AuthProvider = ({ children }) => {
                 setAuth({});
             }
             setCargando(false);
-        }
-        autenticarUsuario()
-    }, [])
+        };
+        autenticarUsuario();
+    }, []);
 
     const cerrarSesion = () => {
-        localStorage.removeItem('token')
-        setAuth({})
-    }
+        localStorage.removeItem("token");
+        setAuth({});
+    };
 
     return (
         <AuthContext.Provider
@@ -48,16 +51,14 @@ const AuthProvider = ({ children }) => {
                 auth,
                 setAuth,
                 cargando,
-                cerrarSesion
+                cerrarSesion,
             }}
         >
             {children}
         </AuthContext.Provider>
-    )
-}
+    );
+};
 
-export {
-    AuthProvider
-}
+export { AuthProvider };
 
-export default AuthContext
+export default AuthContext;

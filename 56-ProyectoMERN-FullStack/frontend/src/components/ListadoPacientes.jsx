@@ -1,5 +1,5 @@
-import usePacientes from '../hooks/usePacientes';
-import Paciente from './Paciente';
+import usePacientes from "../hooks/usePacientes";
+import Paciente from "./Paciente";
 
 const ListadoPacientes = () => {
     const { pacientes } = usePacientes();
@@ -18,11 +18,8 @@ const ListadoPacientes = () => {
                         </span>
                     </p>
 
-                    {pacientes.map( paciente =>(  
-                      <Paciente 
-                        key={paciente._id}
-                        paciente={paciente}
-                      />
+                    {pacientes.map((paciente) => (
+                        <Paciente key={paciente._id} paciente={paciente} />
                     ))}
                 </>
             ) : (
