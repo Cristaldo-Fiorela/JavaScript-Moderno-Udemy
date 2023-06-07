@@ -3,11 +3,9 @@ import usePacientes from '../hooks/usePacientes';
 const Paciente = ({ paciente }) => {
 
     const { setEdicion } = usePacientes();
-    const { email, nombre, fecha, sintomas, propietarios, _id } = paciente;
+    const { email, nombre, fecha, sintomas, propietario, _id } = paciente;
 
-    console.log(fecha)
-
-    const formatearFecha = () => {
+    const formatearFecha = (fecha) => {
         const nuevaFecha =  new Date(fecha);
         return new Intl.DateTimeFormat('es-MX', {dateStyle: 'long'}).format(nuevaFecha)
     }
@@ -24,7 +22,7 @@ const Paciente = ({ paciente }) => {
             <p className="font-bold uppercase text-indigo-700 my-2">
                 Propietario: {""}
                 <span className="font-normal normal-case text-black">
-                    {propietarios}
+                    {propietario}
                 </span>
             </p>
             <p className="font-bold uppercase text-indigo-700 my-2">
