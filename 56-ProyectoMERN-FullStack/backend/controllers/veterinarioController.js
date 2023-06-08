@@ -36,7 +36,7 @@ const registrar = async (req, res) => {
 
 const perfil = (req, res) => {
     const { veterinario } = req;
-    res.json( veterinario );
+    res.json(veterinario);
 }
 
 const confirmar = async (req, res) => {
@@ -93,12 +93,12 @@ const autenticar = async (req, res) => {
     }
 }
 
-const olvidePassword = async ( req, res ) => {
+const olvidePassword = async (req, res) => {
     const { email } = req.body;
 
     const existeVeterinario = await Veterinario.findOne({ email });
 
-    if(!existeVeterinario) {
+    if (!existeVeterinario) {
         const error = new Error('El usuario no existe');
         return res.status(400).json({ msg: error.message });
     }
@@ -114,18 +114,18 @@ const olvidePassword = async ( req, res ) => {
             token: existeVeterinario.token
         });
 
-        res.json({ msg: 'Hemos enviado un mail con las instrucciones'})
+        res.json({ msg: 'Hemos enviado un mail con las instrucciones' })
     } catch (error) {
         console.log(error)
     }
 }
 
-const comprobarToken = async( req, res ) => {
+const comprobarToken = async (req, res) => {
     const { token } = req.params;
 
     const tokenValido = await Veterinario.findOne({ token });
 
-    if(tokenValido) {
+    if (tokenValido) {
         // El token es valido, el usuario existe
         res.json({ msg: 'Token valido y el usuario existe' });
     } else {
@@ -134,13 +134,13 @@ const comprobarToken = async( req, res ) => {
     }
 }
 
-const nuevoPassword = async ( req, res ) => {
+const nuevoPassword = async (req, res) => {
     const { token } = req.params;
     const { password } = req.body;
 
     const veterinario = await Veterinario.findOne({ token });
 
-    if(!veterinario) {
+    if (!veterinario) {
         const error = new Error('Hubo un error');
         return res.status(400).json({ msg: error.message });
     }
@@ -155,26 +155,26 @@ const nuevoPassword = async ( req, res ) => {
     }
 }
 
-const actualizarPerfil =  async ( req, res ) => {
+const actualizarPerfil = async (req, res) => {
     const veterinario = await Veterinario.findById(req.params.id);
 
-    if(!veterinario) {
+    if (!veterinario) {
         const error = new Error('Hubo un error');
-        return res.status(400).json({ msg: error.message})
+        return res.status(400).json({ msg: error.message })
     }
 
     const { email } = req.body;
 
-    if(veterinario.email !== req.body.email) {
-        const existeEmail = await Veterinario.findOne({email});
-        if(existeEmail) {
+    if (veterinario.email !== req.body.email) {
+        const existeEmail = await Veterinario.findOne({ email });
+        if (existeEmail) {
             const error = new Error('Este email ya esta en uso');
-            return res.status(400).json({ msg: error.message})
+            return res.status(400).json({ msg: error.message })
         }
     }
 
     try {
-        veterinario.nombre = req.body.nombre  || veterinario.nombre;
+        veterinario.nombre = req.body.nombre || veterinario.nombre;
         veterinario.email = req.body.email;
         veterinario.web = req.body.web;
         veterinario.telefono = req.body.telefono || veterinario.telefono;
@@ -187,9 +187,30 @@ const actualizarPerfil =  async ( req, res ) => {
     }
 }
 
-const actualizarPassword =  async ( req, res ) => {
-    console.log(req.veterinario);
-    console.log(req.body);
+const actualizarPassword = async (req, res) => {
+
+    // Leer los datos
+    const { id } = req.veterinario;
+    const { pwd_actual, pwd_nuevo } = req.body;
+
+    // Comprobar que veterinario exista
+    const veterinario = await Veterinario.findById(id);
+
+    if (!veterinario) {
+        const error = new Error('Hubo un error');
+        return res.status(400).json({ msg: error.message })
+    }
+
+    // Comprobar su password
+    if (await veterinario.comprobarPassword(pwd_actual)) {
+        // Almacenando el password
+        veterinario.password = pwd_nuevo;
+        await veterinario.save();
+        res.json({ msg: 'Password Almacenado Correctamente'})
+    } else {
+        const error = new Error('El password actual es incorrecto');
+        return res.status(400).json({ msg: error.message })
+    }
 }
 
 export {
